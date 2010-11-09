@@ -1,0 +1,22 @@
+grammar Lucene
+
+  rule expression
+    space? '(' body ')' space? <Expression>
+  end
+
+  rule body
+    (expression / q_and / term / space)* <Body>
+  end  
+
+  rule q_and
+    'AND' <And>
+  end
+
+  rule term
+    [a-zA-Z0-9] [a-zA-Z0-9]* <Term> 
+  end
+
+  rule space
+    [\s]+
+  end
+end
