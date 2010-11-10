@@ -1,16 +1,17 @@
 require 'treetop'
+require 'qp/node_extensions'
 
-BASE_PATH = File.expand_path(File.dirname(__FILE__))
-
-require File.join(BASE_PATH, 'node_extensions.rb')
+class ParseError < StandardError
+end
 
 class Parser
-  Treetop.load(File.join(BASE_PATH, 'lucene.treetop'))
+  @@base_path = File.expand_path(File.dirname(__FILE__))
+  Treetop.load(File.join(@@base_path, 'lucene.treetop'))
   @@parser = LuceneParser.new
 
   def self.parse(data)
     tree = @@parser.parse(data)
-    raise Exception, "Parse error at offset: #{@@parser.index}" if tree.nil?
+    raise ParseError, "Parse error at offset: #{@@parser.index}" if tree.nil?
     self.clean_tree(tree)
     tree.to_array
   end
@@ -25,3 +26,4 @@ class Parser
     root_node.elements.each { |node| self.clean_tree(node) }
   end
 end
+

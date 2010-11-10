@@ -1,5 +1,8 @@
 * List
 ** TODO Setup an rspec test harness
+** TODO Put code into a QP module
+This may be a bit tricky b/c treetop is finding the extension modules
+by name.
 ** TODO Support parens for grouping
 ** TODO NOT
 ** TODO + for required

@@ -13,7 +13,7 @@ grammar Lucene
   end
 
   rule expression
-    group / boolean_expression / term
+    boolean_expression / group / term
   end
 
   rule boolean_operator
@@ -33,7 +33,7 @@ grammar Lucene
   end
 
   rule term
-    [a-zA-Z0-9]+  <Term> 
+    !boolean_operator [a-zA-Z0-9_-]+ <Term> 
   end
 
   rule space
