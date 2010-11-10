@@ -11,7 +11,9 @@ class Parser
 
   def self.parse(data)
     tree = @@parser.parse(data)
-    raise ParseError, "Parse error at offset: #{@@parser.index}" if tree.nil?
+    msg = "Parse error at offset: #{@@parser.index}\n"
+    msg += "Reason: #{@@parser.failure_reason}"
+    raise ParseError, msg if tree.nil?
     self.clean_tree(tree)
     tree.to_array
   end
