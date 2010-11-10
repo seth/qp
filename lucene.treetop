@@ -1,15 +1,23 @@
 grammar Lucene
 
-  rule expression
-    space? '(' body ')' space? <Expression>
+  rule body
+    (boolean_expression / term / space)* <Body>
   end
 
-  rule body
-    (expression / q_and / term / space)* <Body>
-  end  
+  rule boolean_expression
+    term space+ boolean_operator space+ term <Body>
+  end
 
-  rule q_and
-    'AND' <And>
+  rule boolean_operator
+    and_operator / or_operator
+  end
+
+  rule and_operator
+    'AND' <AndOperator> / '&&' <AndOperator>
+  end
+
+  rule or_operator
+    'OR' <OrOperator> / '||' <OrOperator>
   end
 
   rule term

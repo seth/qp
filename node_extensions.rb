@@ -5,11 +5,11 @@ module Lucene
     end
   end
 
-  class Expression < Treetop::Runtime::SyntaxNode
-    def to_array
-      self.elements[0].to_array
-    end
-  end
+  # class Expression < Treetop::Runtime::SyntaxNode
+  #   def to_array
+  #     self.elements[0].to_array
+  #   end
+  # end
 
   class Body < Treetop::Runtime::SyntaxNode
     def to_array
@@ -17,9 +17,16 @@ module Lucene
     end
   end
 
-  class And < Treetop::Runtime::SyntaxNode
+  class AndOperator < Treetop::Runtime::SyntaxNode
     def to_array
       "OP:AND"
     end
   end
+
+    class OrOperator < Treetop::Runtime::SyntaxNode
+    def to_array
+      "OP:OR"
+    end
+  end
+
 end
