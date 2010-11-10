@@ -4,12 +4,16 @@ grammar Lucene
     (expression / space)* <Body>
   end
 
+  rule group
+    space? '(' body ')' space? <Group>
+  end
+
   rule boolean_expression
-    term space+ boolean_operator space+ body <BooleanExpression>
+    (group / term) space+ boolean_operator space+ body <BooleanExpression>
   end
 
   rule expression
-    boolean_expression / term
+    group / boolean_expression / term
   end
 
   rule boolean_operator
@@ -24,8 +28,12 @@ grammar Lucene
     'OR' <OrOperator> / '||' <OrOperator>
   end
 
+  rule not_operator
+    'NOT' <NotOperator>
+  end
+
   rule term
-    [a-zA-Z0-9] [a-zA-Z0-9]* <Term> 
+    [a-zA-Z0-9]+  <Term> 
   end
 
   rule space

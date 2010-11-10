@@ -17,6 +17,12 @@ module Lucene
     end
   end
 
+  class Group < Treetop::Runtime::SyntaxNode
+    def to_array
+      self.elements.map { |x| x.to_array }
+    end
+  end
+
   class BooleanExpression < Treetop::Runtime::SyntaxNode
     def to_array
       op = self.elements[1].to_array

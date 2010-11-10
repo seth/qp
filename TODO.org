@@ -1,0 +1,25 @@
+* List
+** TODO Setup an rspec test harness
+** TODO Support parens for grouping
+** TODO NOT
+** TODO + for required
+** TODO - for prohibited
+** TODO Quoted strings aka phrases
+** TODO Range query syntax
+** TODO Fields
+** TODO Field grouping
+: title:(+return +"pink panther")
+** TODO Escaping of special characters
+Lucene supports escaping special characters that are part of the query
+syntax. The current list special characters are
+
+: + - && || ! ( ) { } [ ] ^ " ~ * ? : \
+
+To escape these character use the \ before the character. For example
+to search for (1+1):2 use the query:
+
+: \(1\+1\)\:2
+
+** TODO Proximity search
+** TODO Term boosting
+** TODO Fuzzy searches
