@@ -17,6 +17,15 @@ module Lucene
     end
   end
 
+  class BooleanExpression < Treetop::Runtime::SyntaxNode
+    def to_array
+      op = self.elements[1].to_array
+      a = self.elements[0].to_array
+      b = self.elements[2].to_array
+      "(#{op} #{a} #{b})"
+    end
+  end
+
   class AndOperator < Treetop::Runtime::SyntaxNode
     def to_array
       "OP:AND"

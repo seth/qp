@@ -1,11 +1,15 @@
 grammar Lucene
 
   rule body
-    (boolean_expression / term / space)* <Body>
+    (expression / space)* <Body>
   end
 
   rule boolean_expression
-    term space+ boolean_operator space+ term <Body>
+    term space+ boolean_operator space+ body <BooleanExpression>
+  end
+
+  rule expression
+    boolean_expression / term
   end
 
   rule boolean_operator
