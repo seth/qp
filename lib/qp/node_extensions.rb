@@ -73,4 +73,11 @@ module Lucene
     end
   end
 
+  class Phrase < Treetop::Runtime::SyntaxNode
+    def to_array
+      "STR:#{self.text_value}"
+    end
+  end
+
+
 end

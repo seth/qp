@@ -12,7 +12,7 @@ describe "single term queries" do
     end
   end
   describe "invalid" do
-    %w(AND OR NOT %).each do |t|
+    %w(AND OR NOT :).each do |t|
       it "'#{t}' => ParseError" do
         lambda { Parser.parse(t) }.should raise_error(ParseError)
       end
@@ -105,4 +105,25 @@ describe 'required and prohibited prefixes (+/-)' do
       end
     end
   end
+end
+
+describe "strings" do
+  phrases = [['"single"', ['STR:"single"']],
+             ['"two term"', ['STR:"two term"']]
+             ]
+  phrases.each do |phrase, expect|
+    it "'#{phrase}' => #{expect.inspect}" do
+      Parser.parse(phrase).should == expect
+    end
+  end
+
+  describe "invalid" do
+    bad = ['""', '":not:a:term"', '"a :bad:']
+    bad.each do |t|
+      it "'#{t}' => ParseError" do
+        lambda { Parser.parse(t) }.should raise_error(ParseError)
+      end
+    end
+  end
+  
 end

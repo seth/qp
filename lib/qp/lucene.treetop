@@ -5,8 +5,7 @@ grammar Lucene
   end
 
   rule expression
-    #operationbinary_op / not_op / required_op / group / term
-    operation / group / term
+    operation / group / term / string
   end
 
   rule group
@@ -59,6 +58,11 @@ grammar Lucene
 
   rule prohibited_operator
     '-' <ProhibitedOperator>
+  end
+
+  rule string
+    #'"' (!'"' . / '\"')* '"' <Phrase>
+    '"' term (space term)* '"' <Phrase>
   end
 
   rule term
