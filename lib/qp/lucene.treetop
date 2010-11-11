@@ -8,6 +8,10 @@ grammar Lucene
     operation / group / term / string
   end
 
+  rule term
+    keyword valid_letter+ <Term> / !keyword valid_letter+ <Term> 
+  end
+
   rule group
     space? '(' body ')' space? <Group>
   end
@@ -65,8 +69,14 @@ grammar Lucene
     '"' term (space term)* '"' <Phrase>
   end
 
-  rule term
-    !(boolean_operator / not_operator) [a-zA-Z0-9_-]+ <Term> 
+## marker
+
+  rule keyword
+    'AND' / 'OR' / 'NOT'
+  end
+
+  rule valid_letter
+    [a-zA-Z0-9_-]
   end
 
   rule space

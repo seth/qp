@@ -2,9 +2,10 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 require 'qp/parser'
 
 describe "single term queries" do
-  basic_terms = %w(a ab 123 a1 2b foo_bar baz-baz ACME)
+  basic_terms = %w(a ab 123 a1 2b foo_bar baz-baz)
   basic_terms << "  leading"
   basic_terms << "trailing "
+  basic_terms += %w(XAND ANDX XOR ORX XNOT NOTX)
   basic_terms.each do |term|
     expect = ["T:#{term.strip}"]
     it "'#{term}' => #{expect.inspect}" do
