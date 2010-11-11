@@ -7,6 +7,21 @@ module Lucene
     end
   end
 
+  class Field < Treetop::Runtime::SyntaxNode
+    def to_array
+      field = self.elements[0].text_value
+      term = self.elements[1].to_array
+      "(F:#{field} #{term})"
+    end
+  end
+
+  class FieldName < Treetop::Runtime::SyntaxNode
+    def to_array
+      self.text_value
+    end
+  end
+
+
   class Body < Treetop::Runtime::SyntaxNode
     def to_array
       self.elements.map { |x| x.to_array }

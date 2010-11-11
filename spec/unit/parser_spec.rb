@@ -149,3 +149,9 @@ describe "strings" do
   end
 
 end
+
+describe "fields" do
+  it "parses a term annotated with a field" do
+    Parser.parse("afield:aterm").should == ["(F:afield T:aterm)"]
+  end
+end

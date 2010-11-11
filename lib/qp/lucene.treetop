@@ -5,11 +5,19 @@ grammar Lucene
   end
 
   rule expression
-    operation / group / term / string
+    operation / group / field / term / string
   end
 
   rule term
     keyword valid_letter+ <Term> / !keyword valid_letter+ <Term> 
+  end
+
+  rule field
+    field_name ":" (term/string/group) <Field>
+  end
+
+  rule field_name
+    !keyword valid_letter+ <FieldName>
   end
 
   rule group
@@ -72,8 +80,6 @@ grammar Lucene
     #'"' (!'"' . / '\"')* '"' <Phrase>
     '"' term (space term)* '"' <Phrase>
   end
-
-## marker
 
   rule keyword
     'AND' / 'OR' / 'NOT'
