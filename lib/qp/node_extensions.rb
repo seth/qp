@@ -47,10 +47,17 @@ module Lucene
       "(#{op} #{a})"
     end
   end
-
+  
   class NotOperator < Treetop::Runtime::SyntaxNode
     def to_array
       "OP:NOT"
+    end
+  end
+
+  class RequiredExpression < Treetop::Runtime::SyntaxNode
+    def to_array
+      a = self.elements[0].to_array
+      "(OP:+ #{a})"
     end
   end
 

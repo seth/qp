@@ -97,5 +97,17 @@ describe "NOT queries" do
       lambda { Parser.parse(d) }.should raise_error(ParseError)
     end
   end
+end
+
+describe 'required term using + prefix' do
+
+  [
+   ['+foo', ["(OP:+ T:foo)"]],
+   ['bar +foo', ["T:bar", "(OP:+ T:foo)"]]
+  ].each do |input, expect|
+    it "should parse '#{input} => #{expect.inspect}" do
+      Parser.parse(input).should == expect
+    end
+  end
 
 end

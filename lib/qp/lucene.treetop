@@ -13,7 +13,7 @@ grammar Lucene
   end
 
   rule expression
-    boolean_expression / not_expression / group / term
+    boolean_expression / not_expression / required_expression / group / term
   end
 
   rule boolean_operator
@@ -35,6 +35,10 @@ grammar Lucene
   rule not_operator
     'NOT' <NotOperator>
   end
+
+  rule required_expression
+    '+' term <RequiredExpression>
+  end    
 
   rule term
     !(boolean_operator / not_operator) [a-zA-Z0-9_-]+ <Term> 
