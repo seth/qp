@@ -53,7 +53,7 @@ describe "grouping with parens" do
     Parser.parse("(aterm)").should == [["T:aterm"]]
   end
 
-  describe "booleans and grouping" do
+  describe "and booleans" do
 
     it "should handle a simple grouped query" do
       Parser.parse("(a && b)").should == [["(OP:AND T:a T:b)"]]
@@ -79,4 +79,23 @@ describe "grouping with parens" do
       Parser.parse("(c AND d) OR (a && b)").should == expect
     end
   end
+end
+
+describe "NOT queries" do
+  # input, output
+  [
+   ["a NOT b", ["T:a", "(OP:NOT T:b)"]],
+   ["a NOT (b || c)", ["T:a", "(OP:NOT (OP:OR T:b T:c))"]]
+  ].each do |input, expected|
+    it "should parse '#{input}' => #{expected.inspect}" do
+      Parser.parse(input).should == expected
+    end
+  end
+
+  ["NOT", "a NOT", "(NOT)"].each do |d|
+    it "should raise a ParseError on '#{d}'" do
+      lambda { Parser.parse(d) }.should raise_error(ParseError)
+    end
+  end
+
 end

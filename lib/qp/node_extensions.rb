@@ -40,4 +40,18 @@ module Lucene
     end
   end
 
+  class UnaryExpression < Treetop::Runtime::SyntaxNode
+    def to_array
+      op = self.elements[0].to_array
+      a = self.elements[1].to_array
+      "(#{op} #{a})"
+    end
+  end
+
+  class NotOperator < Treetop::Runtime::SyntaxNode
+    def to_array
+      "OP:NOT"
+    end
+  end
+
 end
