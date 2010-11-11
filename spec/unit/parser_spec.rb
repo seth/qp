@@ -135,5 +135,13 @@ describe "strings" do
       end
     end
   end
-  
+
+  it "allows strings to be required with '+'" do
+    Parser.parse('+"a b c"').should == ['(OP:+ STR:"a b c")']
+  end
+
+  it "allows strings to be prohibited with '-'" do
+    Parser.parse('-"a b c"').should == ['(OP:- STR:"a b c")']
+  end
+
 end

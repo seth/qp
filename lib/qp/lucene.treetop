@@ -49,9 +49,9 @@ grammar Lucene
   end
 
   rule required_op
-    !valid_letter required_operator term <UnaryOp>
+    !valid_letter required_operator (term/string) <UnaryOp>
     /
-    required_operator term <UnaryOp>
+    required_operator (term/string) <UnaryOp>
   end
   
   rule required_operator
@@ -59,9 +59,9 @@ grammar Lucene
   end
 
   rule prohibited_op
-    !valid_letter prohibited_operator term <UnaryOp>
+    !valid_letter prohibited_operator (term/string) <UnaryOp>
     /
-    prohibited_operator term <UnaryOp>
+    prohibited_operator (term/string) <UnaryOp>
   end
 
   rule prohibited_operator
