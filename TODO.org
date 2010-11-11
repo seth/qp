@@ -10,8 +10,10 @@ This may be a bit tricky b/c treetop is finding the extension modules
 by name.
 ** DONE NOT
    CLOSED: [2010-11-10 Wed 16:19]
-** TODO + for required
-** TODO - for prohibited
+** DONE + for required
+   CLOSED: [2010-11-10 Wed 20:52]
+** DONE - for prohibited
+   CLOSED: [2010-11-10 Wed 21:12]
 ** TODO Quoted strings aka phrases
 ** TODO Range query syntax
 ** TODO Fields

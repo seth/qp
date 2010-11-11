@@ -19,7 +19,7 @@ module Lucene
     end
   end
 
-  class BooleanExpression < Treetop::Runtime::SyntaxNode
+  class BinaryOp < Treetop::Runtime::SyntaxNode
     def to_array
       op = self.elements[1].to_array
       a = self.elements[0].to_array
@@ -40,7 +40,7 @@ module Lucene
     end
   end
 
-  class UnaryExpression < Treetop::Runtime::SyntaxNode
+  class UnaryOp < Treetop::Runtime::SyntaxNode
     def to_array
       op = self.elements[0].to_array
       a = self.elements[1].to_array
@@ -58,6 +58,18 @@ module Lucene
     def to_array
       a = self.elements[0].to_array
       "(OP:+ #{a})"
+    end
+  end
+
+  class RequiredOperator < Treetop::Runtime::SyntaxNode
+    def to_array
+      "OP:+"
+    end
+  end
+
+  class ProhibitedOperator < Treetop::Runtime::SyntaxNode
+    def to_array
+      "OP:-"
     end
   end
 

@@ -99,15 +99,15 @@ describe "NOT queries" do
   end
 end
 
-describe 'required term using + prefix' do
-
-  [
-   ['+foo', ["(OP:+ T:foo)"]],
-   ['bar +foo', ["T:bar", "(OP:+ T:foo)"]]
-  ].each do |input, expect|
-    it "should parse '#{input} => #{expect.inspect}" do
-      Parser.parse(input).should == expect
+describe 'required and prohibited prefixes (+/-)' do
+  ["+", "-"].each do |kind|
+    [
+     ["#{kind}foo", ["(OP:#{kind} T:foo)"]],
+     ["bar #{kind}foo", ["T:bar", "(OP:#{kind} T:foo)"]]
+    ].each do |input, expect|
+      it "should parse '#{input} => #{expect.inspect}" do
+        Parser.parse(input).should == expect
+      end
     end
   end
-
 end

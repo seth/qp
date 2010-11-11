@@ -4,16 +4,25 @@ grammar Lucene
     (expression / space)* <Body>
   end
 
+  rule expression
+    #operationbinary_op / not_op / required_op / group / term
+    operation / group / term
+  end
+
   rule group
     space? '(' body ')' space? <Group>
   end
 
-  rule boolean_expression
-    (group / term) space? boolean_operator space+ body <BooleanExpression>
+  rule operation
+    binary_op / unary_op
   end
 
-  rule expression
-    boolean_expression / not_expression / required_expression / group / term
+  rule unary_op
+    not_op / required_op / prohibited_op
+  end
+
+  rule binary_op
+    (group / term) space? boolean_operator space+ body <BinaryOp>
   end
 
   rule boolean_operator
@@ -28,17 +37,29 @@ grammar Lucene
     'OR' <OrOperator> / '||' <OrOperator>
   end
 
-  rule not_expression
-    not_operator space (group / term) <UnaryExpression>
+  rule not_op
+    not_operator space (group / term) <UnaryOp>
   end
 
   rule not_operator
     'NOT' <NotOperator>
   end
 
-  rule required_expression
-    '+' term <RequiredExpression>
-  end    
+  rule required_op
+    required_operator term <UnaryOp>
+  end
+  
+  rule required_operator
+    '+' <RequiredOperator>
+  end
+
+  rule prohibited_op
+    prohibited_operator term <UnaryOp>
+  end
+
+  rule prohibited_operator
+    '-' <ProhibitedOperator>
+  end
 
   rule term
     !(boolean_operator / not_operator) [a-zA-Z0-9_-]+ <Term> 
