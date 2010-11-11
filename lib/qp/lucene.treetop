@@ -9,7 +9,7 @@ grammar Lucene
   end
 
   rule boolean_expression
-    (group / term) space+ boolean_operator space+ body <BooleanExpression>
+    (group / term) space? boolean_operator space+ body <BooleanExpression>
   end
 
   rule expression

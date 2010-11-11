@@ -74,10 +74,9 @@ describe "grouping with parens" do
       Parser.parse("c OR (a AND b)").should == expect
     end
 
-        it "should handle both sides as groups" do
-      expect = ["(OP:OR T:c (OP:AND T:a T:b))"]   
+    it "should handle both sides as groups" do
+      expect = ["(OP:OR (OP:AND T:c T:d) (OP:AND T:a T:b))"]   
       Parser.parse("(c AND d) OR (a && b)").should == expect
     end
-
   end
 end
