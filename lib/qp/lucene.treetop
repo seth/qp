@@ -41,7 +41,7 @@ grammar Lucene
   end
 
   rule not_op
-    not_operator space (group / term) <UnaryOp>
+    not_operator space (group / term / string) <UnaryOp>
   end
 
   rule not_operator

@@ -136,12 +136,16 @@ describe "strings" do
     end
   end
 
-  it "allows strings to be required with '+'" do
+  it "allows phrases to be required with '+'" do
     Parser.parse('+"a b c"').should == ['(OP:+ STR:"a b c")']
   end
 
-  it "allows strings to be prohibited with '-'" do
+  it "allows phrases to be prohibited with '-'" do
     Parser.parse('-"a b c"').should == ['(OP:- STR:"a b c")']
+  end
+
+  it "allows phrases to be excluded with NOT" do
+    Parser.parse('a NOT "b c"').should == ["T:a", '(OP:NOT STR:"b c")']
   end
 
 end
