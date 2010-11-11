@@ -49,6 +49,8 @@ grammar Lucene
   end
 
   rule required_op
+    !valid_letter required_operator term <UnaryOp>
+    /
     required_operator term <UnaryOp>
   end
   
@@ -57,6 +59,8 @@ grammar Lucene
   end
 
   rule prohibited_op
+    !valid_letter prohibited_operator term <UnaryOp>
+    /
     prohibited_operator term <UnaryOp>
   end
 
@@ -76,7 +80,7 @@ grammar Lucene
   end
 
   rule valid_letter
-    [a-zA-Z0-9_-]
+    [a-zA-Z0-9_+-]
   end
 
   rule space

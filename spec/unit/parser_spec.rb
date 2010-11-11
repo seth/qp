@@ -99,12 +99,21 @@ describe 'required and prohibited prefixes (+/-)' do
   ["+", "-"].each do |kind|
     [
      ["#{kind}foo", ["(OP:#{kind} T:foo)"]],
-     ["bar #{kind}foo", ["T:bar", "(OP:#{kind} T:foo)"]]
+     ["bar #{kind}foo", ["T:bar", "(OP:#{kind} T:foo)"]],
+     ["(#{kind}oneA twoA) b", [["(OP:#{kind} T:oneA)", "T:twoA"], "T:b"]]
     ].each do |input, expect|
       it "should parse '#{input} => #{expect.inspect}" do
         Parser.parse(input).should == expect
       end
     end
+  end
+
+  it 'ignores + embedded in a term' do
+    Parser.parse("one+two").should == ["T:one+two"]
+  end
+  
+  it 'ignores - embedded in a term' do
+    Parser.parse("one-two").should == ["T:one-two"]
   end
 end
 
