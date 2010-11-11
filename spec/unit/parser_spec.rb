@@ -1,26 +1,21 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 require 'qp/parser'
 
-describe "basic query parsing" do
+describe "single term queries" do
   basic_terms = %w(a ab 123 a1 2b foo_bar baz-baz ACME)
+  basic_terms << "  leading"
+  basic_terms << "trailing "
   basic_terms.each do |term|
-    it "should parse the single query term '#{term}'" do
-      Parser.parse(term).should_not be nil
+    expect = ["T:#{term.strip}"]
+    it "'#{term}' => #{expect.inspect}" do
+      Parser.parse(term).should == expect
     end
   end
-
-  it "should label a single term with T:<term>" do
-    Parser.parse("something").should == ["T:something"]
-  end
-
-  it "should be ok with leading and trailing space" do
-    Parser.parse(" leading").should == ["T:leading"]
-    Parser.parse("trailing ").should == ["T:trailing"]
-  end
-
-  %w(AND OR).each do |t|
-    it "should not allow #{t} as a term" do
-      lambda { Parser.parse(t) }.should raise_error(ParseError)
+  describe "invalid" do
+    %w(AND OR NOT %).each do |t|
+      it "'#{t}' => ParseError" do
+        lambda { Parser.parse(t) }.should raise_error(ParseError)
+      end
     end
   end
 end
