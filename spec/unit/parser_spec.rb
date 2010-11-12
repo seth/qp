@@ -167,4 +167,8 @@ describe "fields" do
   it "parses a group annotated with a field" do
     Parser.parse("afield:(a b c)").should == "((F:afield (T:a T:b T:c)))"
   end
+
+  it "parses a phrase annotated with a field" do
+    Parser.parse('afield:"a b c"').should == '((F:afield STR:"a b c"))'
+  end
 end

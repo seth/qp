@@ -13,8 +13,10 @@
    CLOSED: [2010-11-10 Wed 21:12]
 ** DONE Quoted strings aka phrases
    CLOSED: [2010-11-10 Wed 22:08]
-** TODO Fields
-** TODO Field grouping
+** DONE Fields
+   CLOSED: [2010-11-12 Fri 09:17]
+** DONE Field grouping
+   CLOSED: [2010-11-12 Fri 09:17]
 : title:(+return +"pink panther")
 ** TODO Range query syntax
 ** TODO Escaping of special characters
