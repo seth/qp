@@ -5,7 +5,7 @@ grammar Lucene
   end
 
   rule expression
-    operation / group / field / term / string
+    operation / group / field / field_range / term / string
   end
 
   rule term
@@ -16,8 +16,18 @@ grammar Lucene
     field_name ":" (term/string/group) <Field>
   end
 
+  rule field_range
+    field_name ":" "[" range_value " TO " range_value "]" <InclFieldRange>
+    /
+    field_name ":" "{" range_value " TO " range_value "}" <ExclFieldRange>
+  end
+
   rule field_name
     !keyword valid_letter+ <FieldName>
+  end
+
+  rule range_value
+    valid_letter+ <RangeValue>
   end
 
   rule group

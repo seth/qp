@@ -18,7 +18,8 @@
 ** DONE Field grouping
    CLOSED: [2010-11-12 Fri 09:17]
 : title:(+return +"pink panther")
-** TODO Range query syntax
+** DONE Range query syntax
+   CLOSED: [2010-11-12 Fri 09:39]
 ** TODO Escaping of special characters
 Lucene supports escaping special characters that are part of the query
 syntax. The current list special characters are

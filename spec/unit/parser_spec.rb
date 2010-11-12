@@ -172,3 +172,16 @@ describe "fields" do
     Parser.parse('afield:"a b c"').should == '((F:afield STR:"a b c"))'
   end
 end
+
+describe "range queries" do
+  it "parses an inclusive range query" do
+    expect = "((FR:afield [start] [end]))"
+    Parser.parse("afield:[start TO end]").should == expect
+  end
+
+  it "parses an exclusive range query" do
+    expect = "((FR:afield {start} {end}))"
+    Parser.parse("afield:{start TO end}").should == expect
+  end
+
+end

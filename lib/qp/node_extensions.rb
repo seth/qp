@@ -15,6 +15,31 @@ module Lucene
     end
   end
 
+  # TODO: field ranges have some duplication to DRY up
+  class InclFieldRange < Treetop::Runtime::SyntaxNode
+    def to_array
+      field = self.elements[0].text_value
+      range_start = self.elements[1].to_array
+      range_end = self.elements[2].to_array
+      "(FR:#{field} [#{range_start}] [#{range_end}])"
+    end
+  end
+
+  class ExclFieldRange < Treetop::Runtime::SyntaxNode
+    def to_array
+      field = self.elements[0].text_value
+      range_start = self.elements[1].to_array
+      range_end = self.elements[2].to_array
+      "(FR:#{field} {#{range_start}} {#{range_end}})"
+    end
+  end
+
+  class RangeValue < Treetop::Runtime::SyntaxNode
+    def to_array
+      self.text_value
+    end
+  end
+
   class FieldName < Treetop::Runtime::SyntaxNode
     def to_array
       self.text_value
