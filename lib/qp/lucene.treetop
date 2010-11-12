@@ -96,7 +96,11 @@ grammar Lucene
   end
 
   rule valid_letter
-    [a-zA-Z0-9_+-]
+    [a-zA-Z0-9_+-] / '\\' special_char
+  end
+
+  rule special_char
+    [!(){}\[\]^"~*?:\\]
   end
 
   rule space

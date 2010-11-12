@@ -20,7 +20,8 @@
 : title:(+return +"pink panther")
 ** DONE Range query syntax
    CLOSED: [2010-11-12 Fri 09:39]
-** TODO Escaping of special characters
+** DONE Escaping of special characters
+   CLOSED: [2010-11-12 Fri 11:42]
 Lucene supports escaping special characters that are part of the query
 syntax. The current list special characters are
 
@@ -31,6 +32,7 @@ to search for (1+1):2 use the query:
 
 : \(1\+1\)\:2
 
+** TODO Support '!' as a synonym for NOT
 ** TODO Proximity search
 ** TODO Term boosting
 ** TODO Fuzzy searches

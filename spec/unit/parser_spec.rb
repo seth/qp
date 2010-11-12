@@ -19,6 +19,21 @@ describe "single term queries" do
       end
     end
   end
+
+  describe "escaped special characters in terms" do
+    special_chars = ["!", "(", ")", "{", "}", "[", "]", "^", "\"",
+                     "~", "*", "?", ":", "\\"]
+    example_fmts = ['foo%sbar', '%sb', 'a%s', 'a%sb']
+    special_chars.each do |char|
+      example_fmts.each do |fmt|
+        input = fmt % ("\\" + char)
+        expect = "(T:#{input})"
+        it "'#{input}' => #{expect}" do
+          Parser.parse(input).should == expect
+        end
+      end
+    end
+  end
 end
 
 describe "multiple terms" do
@@ -126,12 +141,13 @@ describe 'required and prohibited prefixes (+/-)' do
   end
 end
 
-describe "strings" do
+describe "phrases (strings)" do
   phrases = [['"single"', '(STR:"single")'],
-             ['"two term"', '(STR:"two term")']
+             ['"two term"', '(STR:"two term")'],
+             ['"has \"escaped\" quote\"s"', '(STR:"has \"escaped\" quote\"s")']
              ]
   phrases.each do |phrase, expect|
-    it "'#{phrase}' => #{expect.inspect}" do
+    it "'#{phrase}' => #{expect}" do
       Parser.parse(phrase).should == expect
     end
   end
