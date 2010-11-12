@@ -24,7 +24,7 @@ module Lucene
 
   class Body < Treetop::Runtime::SyntaxNode
     def to_array
-      self.elements.map { |x| x.to_array }
+      "(" + self.elements.map { |x| x.to_array }.join(" ") + ")"
     end
   end
 
