@@ -39,3 +39,17 @@ to search for (1+1):2 use the query:
 ** TODO Put code into a QP module
 This may be a bit tricky b/c treetop is finding the extension modules
 by name.
+* Notes
+** How to debug rules
+You can get some good debug info by adding an executable look-ahead to
+a rule.  Here's an example:
+
+#+BEGIN_SRC 
+   rule group
+    space? '(' body ')' space? &{|s| puts "group: #{s.inspect}"; true } <Group>
+   end
+#+END_SRC
+
+The block must return true, otherwise the rule won't succeed.
+
+
