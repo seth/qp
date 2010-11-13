@@ -60,10 +60,16 @@ grammar Lucene
 
   rule not_op
     not_operator space (group / term / string) <UnaryOp>
+    /
+    bang_operator space? (group / term / string) <UnaryOp>
   end
 
   rule not_operator
     'NOT' <NotOperator>
+  end
+
+  rule bang_operator
+    '!' <NotOperator>
   end
 
   rule required_op

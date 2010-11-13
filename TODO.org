@@ -32,7 +32,8 @@ to search for (1+1):2 use the query:
 
 : \(1\+1\)\:2
 
-** TODO Support '!' as a synonym for NOT
+** DONE Support '!' as a synonym for NOT
+   CLOSED: [2010-11-12 Fri 20:46]
 ** TODO Proximity search
 ** TODO Term boosting
 ** TODO Fuzzy searches

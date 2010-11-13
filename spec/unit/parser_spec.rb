@@ -105,7 +105,11 @@ describe "NOT queries" do
   # input, output
   [
    ["a NOT b", "(T:a (OP:NOT T:b))"],
-   ["a NOT (b || c)", "(T:a (OP:NOT ((OP:OR T:b (T:c)))))"]
+   ["a ! b", "(T:a (OP:NOT T:b))"],
+   ["a !b", "(T:a (OP:NOT T:b))"],
+   ["a NOT (b || c)", "(T:a (OP:NOT ((OP:OR T:b (T:c)))))"],
+   ["a ! (b || c)", "(T:a (OP:NOT ((OP:OR T:b (T:c)))))"],
+t   ["a !(b || c)", "(T:a (OP:NOT ((OP:OR T:b (T:c)))))"]
   ].each do |input, expected|
     it "should parse '#{input}' => #{expected.inspect}" do
       Parser.parse(input).should == expected
