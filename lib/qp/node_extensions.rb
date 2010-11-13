@@ -80,6 +80,24 @@ module Lucene
     end
   end
 
+  class FuzzyOp < Treetop::Runtime::SyntaxNode
+    def to_array
+      a = self.elements[0].to_array
+      param = self.elements[1]
+      if param
+        "(OP:~ #{a} #{param.to_array})"
+      else
+        "(OP:~ #{a})"
+      end
+    end
+  end
+
+  class FuzzyParam < Treetop::Runtime::SyntaxNode
+    def to_array
+      self.text_value
+    end
+  end
+
   class UnaryOp < Treetop::Runtime::SyntaxNode
     def to_array
       op = self.elements[0].to_array

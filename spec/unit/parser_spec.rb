@@ -109,7 +109,7 @@ describe "NOT queries" do
    ["a !b", "(T:a (OP:NOT T:b))"],
    ["a NOT (b || c)", "(T:a (OP:NOT ((OP:OR T:b (T:c)))))"],
    ["a ! (b || c)", "(T:a (OP:NOT ((OP:OR T:b (T:c)))))"],
-t   ["a !(b || c)", "(T:a (OP:NOT ((OP:OR T:b (T:c)))))"]
+   ["a !(b || c)", "(T:a (OP:NOT ((OP:OR T:b (T:c)))))"]
   ].each do |input, expected|
     it "should parse '#{input}' => #{expected.inspect}" do
       Parser.parse(input).should == expected
@@ -203,5 +203,16 @@ describe "range queries" do
     expect = "((FR:afield {start} {end}))"
     Parser.parse("afield:{start TO end}").should == expect
   end
+end
 
+describe "proximity query" do
+  [
+   ['"one two"~10', '((OP:~ STR:"one two" 10))'],
+   ['word~', '((OP:~ T:word))'],
+   ['word~0.5', '((OP:~ T:word 0.5))']
+  ].each do |input, expect|
+    it "'#{input}' => #{expect}" do
+      Parser.parse(input).should == expect
+    end
+  end
 end
