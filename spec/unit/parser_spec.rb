@@ -216,3 +216,18 @@ describe "proximity query" do
     end
   end
 end
+
+describe "term boosting" do
+  [
+   ['"one two"^10', '((OP:^ STR:"one two" 10))'],
+   ['word^0.5', '((OP:^ T:word 0.5))']
+  ].each do |input, expect|
+    it "'#{input}' => #{expect}" do
+      Parser.parse(input).should == expect
+    end
+  end
+
+  it "should fail to parse if no boosting argument is given" do
+    lambda { Parser.parse("foo^")}.should raise_error(ParseError)
+  end
+end

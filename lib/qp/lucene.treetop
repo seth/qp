@@ -35,7 +35,7 @@ grammar Lucene
   end
 
   rule operation
-    binary_op / unary_op / fuzzy_op
+    binary_op / unary_op / fuzzy_op / boost_op
   end
 
   rule unary_op
@@ -90,6 +90,10 @@ grammar Lucene
 
   rule prohibited_operator
     '-' <ProhibitedOperator>
+  end
+
+  rule boost_op
+    (term/string) '^' fuzzy_param <BoostOp>
   end
 
   rule fuzzy_op

@@ -92,6 +92,14 @@ module Lucene
     end
   end
 
+  class BoostOp < Treetop::Runtime::SyntaxNode
+    def to_array
+      a = self.elements[0].to_array
+      param = self.elements[1]
+      "(OP:^ #{a} #{param.to_array})"
+    end
+  end
+
   class FuzzyParam < Treetop::Runtime::SyntaxNode
     def to_array
       self.text_value

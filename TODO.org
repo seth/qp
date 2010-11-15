@@ -34,9 +34,12 @@ to search for (1+1):2 use the query:
 
 ** DONE Support '!' as a synonym for NOT
    CLOSED: [2010-11-12 Fri 20:46]
-** TODO Proximity search
-** TODO Term boosting
-** TODO Fuzzy searches
+** DONE Proximity search
+   CLOSED: [2010-11-14 Sun 20:45]
+** DONE Fuzzy searches
+   CLOSED: [2010-11-14 Sun 20:45]
+** DONE Term boosting
+   CLOSED: [2010-11-14 Sun 20:45]
 ** TODO Put code into a QP module
 This may be a bit tricky b/c treetop is finding the extension modules
 by name.
